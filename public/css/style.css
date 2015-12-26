@@ -1,0 +1,29 @@
+
+@font-face {
+	font-family: Cantarell;
+	src: url("/public/ttf/cantarell.tff") format("truetype");
+}
+
+html * {
+	font-family: Cantarell;
+}
+
+
+
+
+
+.active {
+	cursor: progress
+}
+
+#user-prompt {
+	color: #B94A48;
+}
+
+input {
+	display: block;
+}
+
+#password {
+	margin-bottom: 10px;
+}
