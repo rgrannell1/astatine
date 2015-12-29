@@ -8,6 +8,7 @@
 	<meta charset="UTF-8">
 
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<script type="text/javascript" src="../javascript/app.js"></script>
 
 </head>
 <body>
@@ -16,21 +17,27 @@
 
 		<form>
 
-			<!-- the salt input field. -->
+			<div id="user-input">
 
-			<label for="salt">
-				<input id="salt" type="text" placeholder="Salt" value="" autofocus tabindex="1" spellcheck="false" maxlength="1024">
-			</label>
+				<!-- the salt input field. -->
 
-			<!-- the password input field. -->
+				<label for="salt">
+					<input id="salt" type="text" placeholder="Salt" value="" autofocus tabindex="1" spellcheck="false" maxlength="1024">
+				</label>
 
-			<label for="password">
-				<input id="password" type="password" placeholder="Master Password" tabindex="2" maxlength="1024">
-			</label>
+				<!-- the password input field. -->
 
-			<span id="user-prompt"></span>
+				<label for="password">
+					<input id="password" type="password" placeholder="Master Password" tabindex="2" maxlength="1024">
+				</label>
 
-			<button type="button" id="get-password" tabindex="3">Get Password</button>
+				<span id="user-prompt"></span>
+
+			</div>
+
+			<div id="button-block">
+				<button type="button" id="get-password" tabindex="3">Get Password</button>
+			</div>
 
 		</form>
 
