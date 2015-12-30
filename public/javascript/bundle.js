@@ -1,3 +1,4 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 "use strict"
 
@@ -5,14 +6,8 @@
 
 
 
-var flagEmpty = id => {
+var element = require('./element')
 
-	var elem = document.getElementById(id)
-
-}
-
-flagEmpty.salt     = flagEmpty.bind({ }, 'salt')
-flagEmpty.password = flagEmpty.bind({ }, 'password')
 
 
 
@@ -25,9 +20,9 @@ var collectInformation = model => {
 		return
 	}
 
-	model.salt.errorMessage     = null
-	model.password.errorMessage = null
-	model.userPrompt.message    = null
+	model.salt.errorMessage     = ''
+	model.password.errorMessage = ''
+	model.userPrompt.message    = ''
 
 	var values = {
 		password: element.password.value( ),
@@ -54,6 +49,14 @@ var collectInformation = model => {
 
 
 
+module.exports = collectInformation
+
+},{"./element":3}],2:[function(require,module,exports){
+
+"use strict"
+
+
+
 var constants = {
 	charcodes: {
 		enter: 13
@@ -63,54 +66,12 @@ var constants = {
 
 
 
+module.exports = constants
 
-var utils = {
-	css:  { },
-	keys: { }
-}
+},{}],3:[function(require,module,exports){
 
+"use strict"
 
-
-utils.css.hasClass = (id, klass) => {
-	return document.getElementById(` ${id} `).className.indexOf(` ${klass} `)
-}
-
-utils.css.replaceClasses = (id, replaced, replacement) => {
-
-	var elem = document.getElementById(id)
-
-	replaced.forEach(klass => {
-		elem.className = elem.className.replace(klass, '')
-	})
-
-	elem.className += replacement
-
-}
-
-
-
-
-utils.keys.getKeycode = event => {
-	return event.keyCode
-}
-
-
-
-
-var model = {
-	button: {
-		isActive: false
-	},
-	salt: {
-		errorMessage: null
-	},
-	password: {
-		errorMessage: null
-	},
-	userPrompt: {
-		message: null
-	}
-}
 
 
 
@@ -197,7 +158,45 @@ element.password.unsetFailure = ( ) => {
 
 
 
-document.getElementById("get-password").addEventListener("click", collectInformation)
+module.exports = element
+
+},{}],4:[function(require,module,exports){
+
+"use strict"
+
+
+
+
+
+var utils              = require('./utils')
+var element            = require('./element')
+var constants          = require('./constants')
+var collectInformation = require('./collect-information')
+
+
+
+
+
+var model = {
+	button: {
+		isActive: false
+	},
+	salt: {
+		errorMessage: ''
+	},
+	password: {
+		errorMessage: ''
+	},
+	userPrompt: {
+		message: ''
+	}
+}
+
+
+
+
+
+document.getElementById("get-password").addEventListener("click", collectInformation.bind({ }, model))
 
 document.getElementById("salt").onkeyup = event => {
 
@@ -219,3 +218,49 @@ document.getElementById("password").onkeyup = event => {
 	}
 
 }
+
+},{"./collect-information":1,"./constants":2,"./element":3,"./utils":5}],5:[function(require,module,exports){
+
+"use strict"
+
+
+
+
+
+var utils = {
+	css:  { },
+	keys: { }
+}
+
+
+
+utils.css.hasClass = (id, klass) => {
+	return document.getElementById(` ${id} `).className.indexOf(` ${klass} `)
+}
+
+utils.css.replaceClasses = (id, replaced, replacement) => {
+
+	var elem = document.getElementById(id)
+
+	replaced.forEach(klass => {
+		elem.className = elem.className.replace(klass, '')
+	})
+
+	elem.className += replacement
+
+}
+
+
+
+
+utils.keys.getKeycode = event => {
+	return event.keyCode
+}
+
+
+
+
+
+module.exports = utils
+
+},{}]},{},[4]);
