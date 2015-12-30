@@ -28,15 +28,12 @@ main {
   box-sizing: border-box; }
 
 #salt:focus::-webkit-input-placeholder, #password:focus::-webkit-input-placeholder {
-  border: 1px solid black;
   color: black; }
 
 #salt:focus:-moz-placeholder, #password:focus:-moz-placeholder {
-  border: 1px solid black;
   color: black; }
 
 #salt:focus::-moz-placeholder, #password:focus::-moz-placeholder {
-  border: 1px solid black;
   color: black; }
 
 #get-password {

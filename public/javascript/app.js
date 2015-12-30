@@ -4,11 +4,72 @@
 
 
 
-var constants = {
+
+var flagEmpty = id => {
+
+	var elem = document.getElementById(id)
 
 }
 
-var utils = {css: { }}
+flagEmpty.salt     = flagEmpty.bind({ }, 'salt')
+flagEmpty.password = flagEmpty.bind({ }, 'password')
+
+
+
+
+var collectInformation = model => {
+
+
+	// -- only rerun if not currently running.
+	if (model.button.isActive === true) {
+		return
+	}
+
+	model.salt.errorMessage     = null
+	model.password.errorMessage = null
+	model.userPrompt.message    = null
+
+	var values = {
+		password: element.password.value( ),
+		salt:     element.salt.value( )
+	}
+
+	if (values.salt.length === 0) {
+
+		flagEmpty.salt( )
+
+	} else if (values.password.length === 0) {
+
+		flagEmpty.password( )
+
+	} else {
+
+		// activate the button.
+
+	}
+
+}
+
+
+
+
+
+var constants = {
+	charcodes: {
+		enter: 13
+	}
+}
+
+
+
+
+
+var utils = {
+	css:  { },
+	keys: { }
+}
+
+
 
 utils.css.hasClass = (id, klass) => {
 	return document.getElementById(` ${id} `).className.indexOf(` ${klass} `)
@@ -29,6 +90,29 @@ utils.css.replaceClasses = (id, replaced, replacement) => {
 
 
 
+utils.keys.getKeycode = event => {
+	return event.keyCode
+}
+
+
+
+
+var model = {
+	button: {
+		isActive: false
+	},
+	salt: {
+		errorMessage: null
+	},
+	password: {
+		errorMessage: null
+	},
+	userPrompt: {
+		message: null
+	}
+}
+
+
 
 
 var element = {
@@ -36,12 +120,8 @@ var element = {
 	button: {
 		setLevel: { }
 	},
-	salt: {
-
-	},
-	password: {
-
-	}
+	salt:     { },
+	password: { }
 
 }
 
@@ -86,7 +166,7 @@ element.button.setMessage = message => {
 
 
 element.salt.value = ( ) => {
-	return
+	return document.getElementById("salt").value
 }
 
 element.salt.setFailure = ( ) => {
@@ -102,7 +182,7 @@ element.salt.unsetFailure = ( ) => {
 
 
 element.password.value = ( ) => {
-	return document.getElementById("get-password").value
+	return document.getElementById("password").value
 }
 
 element.password.setFailure = ( ) => {
@@ -111,4 +191,31 @@ element.password.setFailure = ( ) => {
 
 element.password.unsetFailure = ( ) => {
 	return
+}
+
+
+
+
+
+document.getElementById("get-password").addEventListener("click", collectInformation)
+
+document.getElementById("salt").onkeyup = event => {
+
+	if (utils.keys.getKeycode(event) === constants.charcodes.enter) {
+
+		if (element.salt.value( )) {
+			collectInformation(model)
+		}
+
+	}
+
+}
+
+
+document.getElementById("password").onkeyup = event => {
+
+	if (utils.keys.getKeycode(event) === constants.charcodes.enter) {
+		collectInformation(model)
+	}
+
 }
